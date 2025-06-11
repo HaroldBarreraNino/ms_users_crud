@@ -91,7 +91,7 @@ public class UserController {
 
     // Authentication and Registration Endpoints
 
-    @Operation(summary = "Register a new user account", description = "Creates a new user account with unique username and email")
+    /*@Operation(summary = "Register a new user account", description = "Creates a new user account with unique username and email")
     @ApiResponse(responseCode = "201", description = "User registered successfully",
             content = @Content(mediaType = "application/json",
                     schema = @Schema(implementation = User.class)))
@@ -110,13 +110,13 @@ public class UserController {
         } catch (RuntimeException e) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
         }
-    }
+    }*/
 
     @Operation(summary = "User login", description = "Authenticates a user with username and password")
     @ApiResponse(responseCode = "200", description = "Login successful",
             content = @Content(mediaType = "application/json", schema = @Schema(type = "string", example = "Login successful for user: testuser")))
     @ApiResponse(responseCode = "401", description = "Invalid credentials")
-    @PostMapping("/login")
+    @PostMapping("/auth")
     public ResponseEntity<?> loginUser(@RequestBody LoginRequest loginRequest) {
         Optional<User> userOptional = userService.loginUser(loginRequest.getUsername(), loginRequest.getPassword());
         if (userOptional.isPresent()) {
